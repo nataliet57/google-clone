@@ -1,6 +1,5 @@
 <!DOCTYPE html> 
 <html>
-<head> 
     <title> Welcome to Doodle </title>
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 </head>
