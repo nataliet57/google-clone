@@ -1,5 +1,6 @@
 <!DOCTYPE html> 
 <html>
+<head> 
     <title> Welcome to Doodle </title>
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 </head>
@@ -8,7 +9,8 @@
 
         <div class="mainSection">   
             <div class = "logoContainer">
-                <img src = "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png">
+                <img src = "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png" 
+                title = "Google" alt = "Site logo">
             </div>
             <div class = "searchContainer"> 
                 <form action="search.php" method = "GET">
