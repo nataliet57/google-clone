@@ -34,7 +34,7 @@ $page = isset($_GET["page"]) ? $_GET["page"] : 1;
 
 				<div class="logoContainer">
 					<a href="index.php">
-					<img src="assets/images/googleLogo.png">
+						<img src="assets/images/googleLogo.png">
 					</a>
 				</div>
 
@@ -46,7 +46,7 @@ $page = isset($_GET["page"]) ? $_GET["page"] : 1;
 
 							<input class="searchBox" type="text" name="term" value="<?php echo $term; ?>">
 							<button class="searchButton">
-								<img src="assets/images/searchIcon.png">
+							<img src="assets/images/searchIcon.png">
 							</button>
 						</div>
 
@@ -84,7 +84,7 @@ $page = isset($_GET["page"]) ? $_GET["page"] : 1;
 
 			<?php
 			$resultsProvider = new SiteResultsProvider($con);
-			$pageLimit = 20;
+			$pageSize = 20;
 
 			$numResults = $resultsProvider->getNumResults($term);
 
@@ -92,51 +92,72 @@ $page = isset($_GET["page"]) ? $_GET["page"] : 1;
 
 
 
-			echo $resultsProvider->getResultsHtml($page, $pageLimit, $term);
+			echo $resultsProvider->getResultsHtml($page, $pageSize, $term);
 			?>
 
 
 		</div>
 
-		<div class="paginationContainer" > 
+
+
+		<div class="paginationContainer">
+
 			<div class="pageButtons">
 
-			
-					<div class="pageNumberContainer">
-						<img src="assets/images/pageStart.png">
-					</div>
-
-					<?php
-
-					$currentPage=1;
-					$pagesLeft=10;
-					while($pagesLeft!=0){
-
-						echo"<div class='pageNumberContainer'> 
-
-						<img src='assets/images/page.png'>
-						<span class='pageNumber'>$currentPage</span>
-
-						$currentPage++;
-						$pagesLeft--;
-						</div>";
-
-					}
 
 
-
-
-
-
-
-
-					?>
-					<div class="pageNumberContainer">
-						<img src="assets/images/pageEnd.png">
-					</div>
-
+				<div class="pageNumberContainer">
+					<img src="assets/images/pageStart.png">
 				</div>
+
+				<?php
+				//Creating and desigining bottom page system
+				$pagesToShow =10;
+				$numPages= ceil($numResults/$pageSize);
+				$pagesLeft = min($pagesToShow, $numPages);
+				$currentPage = $page - floor($pagesToShow / 2);
+
+				if($currentPage <1){
+					$currentPage=1;
+				}
+				if($currentPage + $pagesLeft > $numPages){
+					$currentPage= $numPages +1 - $pagesLeft;
+				}
+
+
+				while($pagesLeft != 0 && $currentPage <= $numPages) {
+
+					if($currentPage ==$page){
+						echo "<div class='pageNumberContainer'>
+							<img src='assets/images/pageSelected.png'>
+							<span class='pageNumber'>$currentPage</span>
+						</div>";
+					}else{
+						echo "<div class='pageNumberContainer'>
+							<a href='search.php?term=$term&type=$type&page=$currentPage'>
+								<img src='assets/images/page.png'>
+								<span class='pageNumber'>$currentPage</span> 
+							</a>
+							
+						</div>";
+					}
+					
+
+					$currentPage++;
+					$pagesLeft--;
+
+				}
+
+				?>
+
+				<div class="pageNumberContainer">
+					<img src="assets/images/pageEnd.png">
+				</div>
+			</div>
+
 		</div>
+
+
 
 
 
