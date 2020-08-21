@@ -1,14 +1,13 @@
 <?php
 class SiteResultsProvider {
 
- 
+	private $con;
+
 	public function __construct($con) {
 		$this->con = $con;
 	}
 
 	public function getNumResults($term) {
-
-
 
 		$query = $this->con->prepare("SELECT COUNT(*) as total 
 										 FROM sites WHERE title LIKE :term 
@@ -28,7 +27,6 @@ class SiteResultsProvider {
 	public function getResultsHtml($page, $pageSize, $term) {
 
 		$fromLimit = ($page - 1) * $pageSize;
-
 
 		$query = $this->con->prepare("SELECT * 
 										 FROM sites WHERE title LIKE :term 

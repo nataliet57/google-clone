@@ -133,7 +133,7 @@ function getDetails($url) {
 		if(!in_array($src, $alreadyFoundImages)) {
 			$alreadyFoundImages[] = $src;
 
-			echo "INSERT: " . insertImage($url, $src, $alt, $title);
+			insertImage($url, $src, $alt, $title);
 		}
 
 	}
