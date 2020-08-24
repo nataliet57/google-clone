@@ -10,10 +10,10 @@ class SiteResultsProvider {
 	public function getNumResults($term) {
 
 		$query = $this->con->prepare("SELECT COUNT(*) as total 
-										 FROM sites WHERE title LIKE :term 
-										 OR url LIKE :term 
-										 OR keywords LIKE :term 
-										 OR description LIKE :term");
+										FROM sites WHERE title LIKE :term 
+										OR url LIKE :term 
+										OR keywords LIKE :term 
+										OR description LIKE :term");
 
 		$searchTerm = "%". $term . "%";
 		$query->bindParam(":term", $searchTerm);
@@ -29,12 +29,12 @@ class SiteResultsProvider {
 		$fromLimit = ($page - 1) * $pageSize;
 
 		$query = $this->con->prepare("SELECT * 
-										 FROM sites WHERE title LIKE :term 
-										 OR url LIKE :term 
-										 OR keywords LIKE :term 
-										 OR description LIKE :term
-										 ORDER BY clicks DESC
-										 LIMIT :fromLimit, :pageSize");
+										FROM sites WHERE title LIKE :term 
+										OR url LIKE :term 
+										OR keywords LIKE :term 
+										OR description LIKE :term
+										ORDER BY clicks DESC
+										LIMIT :fromLimit, :pageSize");
 
 		$searchTerm = "%". $term . "%";
 		$query->bindParam(":term", $searchTerm);
@@ -58,7 +58,7 @@ class SiteResultsProvider {
 			$resultsHtml .= "<div class='resultContainer'>
 
 								<h3 class='title'>
-									<a class='result' href='$url'>
+									<a class='result' href='$url' data-linkId='$id'>
 										$title
 									</a>
 								</h3>
